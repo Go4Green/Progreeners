@@ -7,10 +7,13 @@ from http import HTTPStatus
 from secrets import token_hex
 import time
 from datetime import datetime
+from flask_selfdoc import Autodoc
 
 app = Flask(__name__,static_url_path='/static')
 app.secret_key = 'super secret key'
 app.config['SESSION_TYPE'] = 'filesystem'
+
+auto = Autodoc(app)
 
 # sess = Session()
 
@@ -106,6 +109,7 @@ def index():
 
 
 @app.route('/api/producers', methods=['POST'])
+@auto.doc()
 def register_producer():
 	# Check for input validity
 	try:
@@ -153,6 +157,7 @@ def register_producer():
 
 
 @app.route('/api/receivers', methods=['POST'])
+@auto.doc()
 def register_receiver():
 	# Check for input validity
 	try:
@@ -200,6 +205,7 @@ def register_receiver():
 
 
 @app.route('/api/producers/login', methods=['GET'])
+@auto.doc()
 def login_producer():
 	# Check for input validity
 	try:
@@ -250,6 +256,7 @@ def login_producer():
 
 
 @app.route('/api/receivers/login', methods=['GET'])
+@auto.doc()
 def login_receiver():
 	# Check for input validity
 	try:
@@ -300,8 +307,9 @@ def login_receiver():
 
 
 @app.route('/api/producers', methods=['GET'])
+@auto.doc()
 def get_producers():
-	# Get all producers
+	""" Get all producers """
 	try:
 		conn = get_db()
 		conn.set_trace_callback(print)
@@ -334,8 +342,9 @@ def get_producers():
 
 
 @app.route('/api/receivers', methods=['GET'])
+@auto.doc()
 def get_receivers():
-	# Get all receivers
+	""" Get all receivers """
 	try:
 		conn = get_db()
 		conn.set_trace_callback(print)
@@ -368,8 +377,9 @@ def get_receivers():
 
 
 @app.route('/api/producers/<int:producer_id>', methods=['GET'])
+@auto.doc()
 def get_producer(producer_id):
-	# Get producer with id
+	""" Get producer with given id """
 	try:
 		conn = get_db()
 		conn.set_trace_callback(print)
@@ -400,8 +410,9 @@ def get_producer(producer_id):
 
 
 @app.route('/api/receivers/<int:receiver_id>', methods=['GET'])
+@auto.doc()
 def get_receiver(receiver_id):
-	# Get receiver with id
+	""" Get receiver with given id """
 	try:
 		conn = get_db()
 		conn.set_trace_callback(print)
@@ -432,6 +443,7 @@ def get_receiver(receiver_id):
 
 
 @app.route('/api/products', methods=['POST'])
+@auto.doc()
 def announce_product():
 	# Check for input validity
 	try:
@@ -485,8 +497,9 @@ def announce_product():
 
 
 @app.route('/api/products', methods=['GET'])
+@auto.doc()
 def get_products():
-	# Get all products
+	""" Get all products """
 	try:
 		conn = get_db()
 		conn.set_trace_callback(print)
@@ -520,8 +533,9 @@ def get_products():
 
 
 @app.route('/api/products/<int:product_id>', methods=['GET'])
+@auto.doc()
 def get_product(product_id):
-	# Get product with id
+	""" Get product with given id """
 	try:
 		conn = get_db()
 		conn.set_trace_callback(print)
@@ -553,6 +567,7 @@ def get_product(product_id):
 
 
 @app.route('/api/products/<int:product_id>', methods=['DELETE'])
+@auto.doc()
 def remove_product(product_id):
 	# Check for input validity
 	try:
@@ -615,6 +630,7 @@ def remove_product(product_id):
 
 
 @app.route('/api/products/<int:product_id>', methods=['PUT'])
+@auto.doc()
 def update_product(product_id):
 	# Check for input validity
 	try:
@@ -721,6 +737,7 @@ def update_product(product_id):
 
 
 @app.route('/api/results', methods=['POST'])
+@auto.doc()
 def announce_results():
 	# Check for input validity
 	try:
@@ -807,8 +824,9 @@ def announce_results():
 
 
 @app.route('/api/results', methods=['GET'])
+@auto.doc()
 def get_results():
-	# Get all results
+	""" Get all results """
 	try:
 		conn = get_db()
 		conn.set_trace_callback(print)
@@ -840,6 +858,7 @@ def get_results():
 
 
 @app.route('/api/results/<int:results_id>', methods=['GET'])
+@auto.doc()
 def get_single_results(results_id):
 	# Get single results
 	try:
@@ -871,6 +890,7 @@ def get_single_results(results_id):
 
 
 @app.route('/api/producers/<int:producer_id>/products', methods=['GET'])
+@auto.doc()
 def get_producer_products(producer_id):
 	# Check if producer exists
 	try:
@@ -923,6 +943,7 @@ def get_producer_products(producer_id):
 
 
 @app.route('/api/receivers/<int:receiver_id>/products', methods=['GET'])
+@auto.doc()
 def get_receiver_products(receiver_id):
 	# Check if receiver exists
 	try:
@@ -975,6 +996,7 @@ def get_receiver_products(receiver_id):
 
 
 @app.route('/api/producers/<int:producer_id>/results', methods=['GET'])
+@auto.doc()
 def get_producer_results(producer_id):
 	# Check if producer exists
 	try:
@@ -1025,6 +1047,7 @@ def get_producer_results(producer_id):
 
 
 @app.route('/api/receivers/<int:receiver_id>/results', methods=['GET'])
+@auto.doc()
 def get_receiver_results(receiver_id):
 	# Check if receiver exists
 	try:
@@ -1089,22 +1112,6 @@ def query_list(table):
 	# o.add(session.get('username'))
 	print_result('SELECT rowid,* FROM '+table,table)
 	return render_template('template.html',main=o.get())
-	
-'''
-@app.route('/query/list/<table>')
-def query_list(table):
-	if table in ['book','employee','category','publisher','writer','copy','member','borrow','belongs_to','written_by','reminder']:
-		print_result('SELECT rowid,* FROM '+table+';',table)
-		return render_template('template.html',main=o.get())
-	elif table == 'members_books_borrowed':
-		print_result('SELECT rowid,* FROM '+table+';',table,False)
-		return render_template('template.html',main=o.get())
-	elif table == 'borrows_view':
-		print_result('SELECT borrow_id,* FROM '+table+';',table)
-		return render_template('template.html',main=o.get())
-	else:
-		return render_template('template.html',main='<h1>ERROR:invalid table</h1>')
-'''
 
 @app.route('/login/producer')
 def login_producer_get():
@@ -1143,46 +1150,6 @@ def insert_byproduct():
 	cur = conn.cursor()
 	return render_template('sell_waste.html')
 
-@app.route('/update/<table>/<int:rid>/<attribute>/',methods=['POST','GET'])
-def update(table,rid,attribute):
-	print("method",request.method)
-	if request.method == 'POST':
-		r = request.form
-		conn = get_db()
-		conn.set_trace_callback(print)
-		cur = conn.cursor()
-		try:
-			indexid = 'borrow_id' if table == 'borrows_view' else 'rowid'
-			cur.execute("UPDATE "+table+" SET "+attribute+" = ? WHERE "+indexid+" = ?",(r['value'],rid,))
-			conn.commit()
-		except sqlite3.Error:
-			return "an error occured"
-		return "Update Ok"
-	else:
-		return render_template('template.html',main="""<center>
-<h2>Insert new value</h2>
-<form action = "" method = "POST">
-<input type = "text" name = "value" />
-<input type = "submit" value = "submit" />
-</form>
-</center>""")
-
-
-@app.route('/delete/<table>/<int:rowid>')
-def delete(table,rowid):
-	conn = get_db()
-	cur = conn.cursor()
-	if table in ['book','employee','category','publisher','writer','copy','member','borrow','belongs_to','written_by','borrows_view','reminder']:
-		try:
-			indexid = 'borrow_id' if table == 'borrows_view' else 'rowid'
-			cur.execute("DELETE FROM "+table+" WHERE +"+indexid+" = "+str(rowid))
-		except:
-			return "an error occured"
-		conn.commit()
-		return "OK"
-	else:
-		return render_template('template.html',main='<h1>ERROR:invalid table</h1>')
-
 @app.route('/insert/producer',methods=['POST'])
 def insert_book():
 	r = request.form
@@ -1207,14 +1174,6 @@ def insert_member():
 		return "an error occured"
 	return "insertion Ok"
 
-@app.route('/query/number_of_books_borrowed')
-def query_number_of_books_borrowed():
-	conn = get_db()
-	cur = conn.cursor()
-	print_result('''SELECT member.rowid,member.last_name,member.first_name,books FROM 
-	(SELECT member_id,count(member_id) AS books 
-		FROM (select member_id FROM borrow WHERE actual_return_date IS NULL) GROUP BY member_id HAVING count(member_id) > 0) 
-	INNER JOIN member WHERE member.id = member_id;''','book',False)
 	return render_template('template.html',main=o.get())
 
 @app.route('/query/stats')
@@ -1231,6 +1190,10 @@ def query_monthly_salary_costs():
 	<b style="color: #1da1f2;">Πλήθος παραγωγών:</b> %d </br>
 	<b style="color: #1da1f2;">Πλήθος προϊόντων:</b> %d </br>
 	</center>''' % (num_of_producers,number_of_products));
+
+@app.route('/documentation')
+def documentation():
+    return auto.html()
 
 @app.before_first_request
 def startup():
