@@ -1,0 +1,31 @@
+0: register_producer $ 0 $ table producer has no column named lati
+1: register_producer $ 0 $ table producer has no column named lati
+2: register_producer $ 0 $ table producer has no column named lati
+3: register_receiver $ 0 $ no such table: receiver
+4: register_producer $ 0 $ name 'r' is not defined
+5: login_producer $ 1 $ no such table: tokens
+6: login_producer $ 1 $ no such table: tokens
+7: login_producer $ 1 $ no such table: tokens
+8: login_producer $ 1 $ no such table: tokens
+9: login_producer $ 1 $ table tokens has no column named id
+10: login_producer $ 1 $ table tokens has no column named id
+11: login_producer $ 1 $ no such table: tokens
+12: register_producer $ 0 $ no such column: isproducer
+13: register_producer $ 0 $ no such column: isproducer
+14: register_producer $ 1 $ table products has no column named announcement_date
+15: register_producer $ 1 $ table products has no column named announcement_date
+16: register_producer $ 1 $ no such table: products
+17: register_producer $ 1 $ FOREIGN KEY constraint failed
+18: register_producer $ 1 $ FOREIGN KEY constraint failed
+19: login_producer $ 1 $ database is locked
+20: register_producer $ 1 $ 'int' object is not subscriptable
+21: register_producer $ 1 $ 'int' object is not subscriptable
+22: announce_product $ 1 $ table products has no column named receiver_id
+23: get_products $ 0 $ name 'producer_id' is not defined
+24: update_product $ 2 $ no such column: oliveoil
+25: update_product $ 2 $ no such column: oliveoil
+26: login_receiver $ 1 $ table tokens has no column named is_receiver
+27: login_receiver $ 1 $ table tokens has no column named is_receiver
+28: get_results $ 0 $ name 'producer_data' is not defined
+29: get_single_results $ 1 $ name 'results_data_tuple' is not defined
+30: get_producer_results $ 1 $ RIGHT and FULL OUTER JOINs are not currently supported

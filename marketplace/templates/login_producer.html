@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<center>
+	<table>
+	<tr>
+		<td><img src="/static/logo.png" height="116" width="219"></td>
+		<td><b style="color: #1da1f2;font-size: 20pt">Σύστημα διαχείρησης βιομάζας</b></td>
+	</tr>
+	</table>
+</center>
+
+<center>
+
+<h2>Είσοδος παραγωγού</h2>
+<form action="/login/producer" method="POST">
+<table>
+<tr><td>Επωνυμία</td><td><input type ="text" name = "name" required="required" /></td></tr>
+<tr><td>Κωδικός πρόσβασης</td><td><input type="password" name="pass" required="required" /></td></tr>
+<td><input type="submit" value="Είσοδος" /></td>
+</table>
+</form>
+
+</center>
+</body>
+</html>

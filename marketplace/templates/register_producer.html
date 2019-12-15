@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<center>
+	<table>
+	<tr>
+		<td><img src="/static/logo.png" height="116" width="219"></td>                            
+                <td><b style="color: #39b54a;font-size: 20pt">Σύστημα διαχείρησης βιοκαυσίμου</b></td>
+	</tr>
+	</table>
+</center>
+
+<center>
+
+<h2>Εγγραφή επιχείρησης παραγωγής</h2>
+<form action = "/insert/producer" method = "POST">
+<table>
+<tr><td>Επωνυμία</td>  </td> <td><input type ="text" name = "name" /></td></tr>
+<tr><td>Κωδικός πρόσβασης</td>  </td> <td><input type ="password" name = "pass" /></td></tr>
+<tr><td>Διεύθυνση</td>  </td> <td><input type ="text" name = "address" /></td></tr>
+<tr><td>Latitude</td>  </td> <td><input type ="number" name = "lat" step="0.0001" /></td></tr>
+<tr><td>Longitude</td>  </td> <td><input type ="number" name = "lon" step="0.0001" /></td></tr>
+<tr><td>Τηλέφωνο</td>  </td> <td><input type ="text" name = "telephone"/></td></tr>
+<tr><td>Email</td>  </td> <td><input type ="email" name = "email"/></td></tr>
+<td><input type = "submit" value = "Εγγραφή" /></td>
+</table>
+</form
+
+</center>
+</body>
+</html>

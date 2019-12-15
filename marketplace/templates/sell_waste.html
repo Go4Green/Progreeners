@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>Σύστημα διαχείρησης βιοκαυσίμου</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+	
+<table width="100%">
+	<tr>
+		<td style="white-space: nowrap;"><img src="/static/logo.png" height="116" width="219"></td>                            
+		<td style="white-space: nowrap;"><b style="color: #39b54a;font-size: 20pt">Σύστημα διαχείρησης βιοκαυσίμου</b></td>
+		<td width="99%"><img style="float:right" src="/static/prog.png" height="85" width="248"></td>
+	</tr>
+</table>
+
+<ul>
+	<li><a href="/">Αρχική</a></li>
+	<li><a href="/search/product">Αναζήτηση</a></li>
+	<li><a href="/insert/producer">Εγγραφή παραγωγού</a></li>
+	<li><a class="active" href="/insert/byproduct">Εισαγωγή προϊόντος</a></li>
+	<li style="float:right"><a href="/about">Σχετικά</a></li>
+</ul>
+
+<center>
+
+<h2>Δήλωση διάθεσης αποβλήτων βιοκαυσίμου</h2>
+<form action = "/insert/byproduct" method = "POST">
+<table>
+<tr><td>id</td>  </td> <td><input type ="text" name = "id" /></td></tr>
+<tr><td>Τύπος αποβλήτου</td>  </td> <td><select name = "type">
+	<option value="none">Επιλέξτε τύπο...</option>
+	<option value="olive">Ελαιόλαδο</option>
+	<option value="sunflower">Ηλιέλαιο</option>
+	<option value="seed">Σποραίλαιο</option>
+	<option value="animal">Ζωϊκό λίπος</option>
+	<option value="misk">Ακαθόριστο</option>
+</select></td></tr>
+<tr><td>Προσεγγιστικό βάρος</td>  </td> <td><input type ="number" name = "amount" /></td></tr>
+<tr><td>Ημερομηνία διαθεσιμότητας</td>  </td> <td><input type ="date" name = "availability_date" /></td></tr>
+<td><input type = "submit" value = "Καταχώρηση" /></td>
+</table>
+</form
+
+</center>
+</body>
+</html>
