@@ -445,6 +445,7 @@ def get_receiver(receiver_id):
 @app.route('/api/products', methods=['POST'])
 @auto.doc()
 def announce_product():
+	""" Submit a new product """
 	# Check for input validity
 	try:
 		r = request.get_json()
@@ -499,7 +500,7 @@ def announce_product():
 @app.route('/api/products', methods=['GET'])
 @auto.doc()
 def get_products():
-	""" Get all products """
+	""" List all products """
 	try:
 		conn = get_db()
 		conn.set_trace_callback(print)
@@ -569,6 +570,7 @@ def get_product(product_id):
 @app.route('/api/products/<int:product_id>', methods=['DELETE'])
 @auto.doc()
 def remove_product(product_id):
+	""" Remove product with given id """
 	# Check for input validity
 	try:
 		r = request.get_json()
@@ -632,6 +634,7 @@ def remove_product(product_id):
 @app.route('/api/products/<int:product_id>', methods=['PUT'])
 @auto.doc()
 def update_product(product_id):
+	""" Update given product """
 	# Check for input validity
 	try:
 		r = request.get_json()
@@ -739,6 +742,7 @@ def update_product(product_id):
 @app.route('/api/results', methods=['POST'])
 @auto.doc()
 def announce_results():
+	""" Submit a review about given product """
 	# Check for input validity
 	try:
 		r = request.get_json()
@@ -826,7 +830,7 @@ def announce_results():
 @app.route('/api/results', methods=['GET'])
 @auto.doc()
 def get_results():
-	""" Get all results """
+	""" Get all reviews about products """
 	try:
 		conn = get_db()
 		conn.set_trace_callback(print)
@@ -860,6 +864,7 @@ def get_results():
 @app.route('/api/results/<int:results_id>', methods=['GET'])
 @auto.doc()
 def get_single_results(results_id):
+	""" Get review about product with given id """
 	# Get single results
 	try:
 		conn = get_db()
@@ -892,6 +897,7 @@ def get_single_results(results_id):
 @app.route('/api/producers/<int:producer_id>/products', methods=['GET'])
 @auto.doc()
 def get_producer_products(producer_id):
+	""" List all products from given producer """
 	# Check if producer exists
 	try:
 		conn = get_db()
@@ -945,6 +951,7 @@ def get_producer_products(producer_id):
 @app.route('/api/receivers/<int:receiver_id>/products', methods=['GET'])
 @auto.doc()
 def get_receiver_products(receiver_id):
+	""" Get receivers of product of given id """
 	# Check if receiver exists
 	try:
 		conn = get_db()
@@ -998,6 +1005,7 @@ def get_receiver_products(receiver_id):
 @app.route('/api/producers/<int:producer_id>/results', methods=['GET'])
 @auto.doc()
 def get_producer_results(producer_id):
+	""" Get all reviews submitted to producer """
 	# Check if producer exists
 	try:
 		conn = get_db()
@@ -1049,6 +1057,7 @@ def get_producer_results(producer_id):
 @app.route('/api/receivers/<int:receiver_id>/results', methods=['GET'])
 @auto.doc()
 def get_receiver_results(receiver_id):
+	"""  """
 	# Check if receiver exists
 	try:
 		conn = get_db()
@@ -1184,7 +1193,7 @@ def query_monthly_salary_costs():
 	num_of_producers = cur.fetchone()[0]
 	cur.execute("SELECT count() FROM product");
 	number_of_products = cur.fetchone()[0]
-	
+
 	return render_template('template.html',main='''
 	<center>
 	<b style="color: #1da1f2;">Πλήθος παραγωγών:</b> %d </br>
@@ -1205,5 +1214,5 @@ def startup():
 		with open(filename) as file:
 			script = file.read()
 			cur.executescript(script)
-	
+
 	conn.commit()
