@@ -28,7 +28,7 @@ table#res td {
 }
 
 table#res tr:nth-child(odd) {
-  background-color: #ffddcc;
+  background-color: /*#ffddcc*/ #adebad;
 }
 
 a { 
