@@ -71,7 +71,7 @@ class output:
 
 o = output()
 
-def print_result(statement,table,updatable=True):
+def print_result(statement,updatable=True):
 	cur = get_db().cursor()
 	cur.execute(statement)
 	names = [description[0] for description in cur.description]
@@ -91,10 +91,10 @@ def print_result(statement,table,updatable=True):
 		o.add('<tr>')
 
 		for j in range(1,1+len(i[1:])):
-			if updatable:
-				o.add('<td><a href="/update/%s/%d/%s">%s</a></td>'%(table,i[0],names[j],i[j]))
-			else:
-				o.add('<td>%s</td>'%(i[j]))
+			#if updatable:
+			#	o.add('<td><a href="/update/%s/%d/%s">%s</a></td>'%(table,i[0],names[j],i[j]))
+			#else:
+			o.add('<td>%s</td>'%(i[j]))
 		
 		if updatable:
 			o.add('<td><a href="/delete/%s/%d"><font color="red">X</font></a></td>' % (table,i[0]) )
@@ -1116,10 +1116,10 @@ def query():
 	
 	return app.send_static_file('query.html')
 
-@app.route('/search/<table>')
-def query_list(table):
+@app.route('/search/products')
+def query_list():
 	# o.add(session.get('username'))
-	print_result('SELECT rowid,* FROM '+table,table)
+	print_result('SELECT pass,name,telephone,email,address,announcement_date,amount AS "amount in kg",kind,availability_date ,price FROM producer JOIN products ON producer.id = products.id WHERE products.receiver_id IS NULL',updatable=False)
 	return render_template('template.html',main=o.get())
 
 @app.route('/login/producer')
