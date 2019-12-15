@@ -1,4 +1,4 @@
-from flask import Flask,g,render_template,request,flash,jsonify
+from flask import Flask,g,render_template,request,flash,jsonify,redirect
 import sqlite3
 from datetime import date,timedelta
 # from flask_session import Session
@@ -6,7 +6,9 @@ from flask import session
 from http import HTTPStatus
 from secrets import token_hex
 import time
+import json
 from datetime import datetime
+import requests
 from flask_selfdoc import Autodoc
 
 app = Flask(__name__,static_url_path='/static')
@@ -1137,15 +1139,29 @@ def login_producer_post():
 	username = r['name']
 	password = r['pass']
 
-	result = cur.execute(f'SELECT name FROM producer WHERE name="{username}" AND pass="{password}"')
+	request_dict = {
+		'name': username,
+		'password': password
+	}
 
-	if result.fetchone() is not None:
-		session['username'] = username
-		o = output()
-		o.add(session.get('username'))
-		return render_template('template.html', main=o.get())
+	url = 'http://127.0.0.1:5000/api/producers/login'
+	headers = {'Content-Type': "application/json", 'Accept': "application/json"}
 
-	return render_template('login_producer.html')
+	token_json = requests.get(url, headers=headers, json=request_dict).text
+
+	try:
+		json_acceptable_string = token_json.replace("'", "\"")
+		token_dict = json.loads(json_acceptable_string)
+		token = token_dict['token']
+		session['token'] = token
+	except Exception as e:
+		print(f'Error: ############# {e}')
+
+		#session['username'] = username
+		#o = output()
+		#o.add(session.get('username'))
+
+	return redirect('http://127.0.0.1:5000/search/products', code=302)
 
 @app.route('/insert/producer')
 def insert_producer():
