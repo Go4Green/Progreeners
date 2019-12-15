@@ -2,27 +2,29 @@
 <html>
 <head>
 <meta charset="UTF-8"/>
-<title>Σύστημα διαχείρησης βιοκαυσίμου</title>
+<title>Πλατφόρμα αγοραπωλησίας βιομάζας</title>
 <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
 	
 <table width="100%">
 	<tr>
-		<td width="99%"><img style="float:right" src="/marketplace/static/Στιγμιότυπο 2019-12-15, 1.26.26 μμ.png" height="85" width="248"></td>
-		<td style="white-space: nowrap;"><b style="color: #39b54a;font-size: 20pt">Πλατφόρμα αγοροπωλησίας βιοκαυσίμου</b></td>
-		<td style="white-space: nowrap;"><img src="/static/prog.png" height="116" width="219"></td>   
+		<td style="white-space: nowrap;"><img  src="/static/logo.png" height="85" width="248"></td>
+		<td style="white-space: nowrap;"><b tyle="float:left" style="color: #39b54a;font-size: 20pt">Πλατφόρμα αγοροπωλησίας βιομάζας</b></td>
+		<td width="99%"><img style="float:right" src="/static/prog.png" height="116" width="219"></td>   
 	</tr>
 </table>
 
 <ul>
-	<li><a href="/">Αρχική</a></li>
-	<li><a href="/search/product">Αναζήτηση</a></li>
+	<li><a class="active" href="/">Αρχική</a></li>
+	<li><a href="/login/producer">Είσοδος παραγωγού</a></li>
+	<li><a href="/search/products">Αναζήτηση</a></li>
 	<li><a href="/insert/producer">Εγγραφή παραγωγού</a></li>
-	<li><a class="active" href="/insert/byproduct">Εισαγωγή προϊόντος</a></li>
+	<li><a href="/insert/byproduct">Εισαγωγή προϊόντος</a></li>
+	<li><a href="/documentation">REST API DOC</a></li>
 	<li style="float:right"><a href="/about">Σχετικά</a></li>
 </ul>
-
+<p style="width: 70%;margin-left: 15%;margin-top: 2%">
 <center>
 
 <h2>Δήλωση διάθεσης προϊόντος</h2>
@@ -41,8 +43,9 @@
 <tr><td>Ημερομηνία διαθεσιμότητας</td>  </td> <td><input type ="date" name = "availability_date" /></td></tr>
 <td><input type = "submit" value = "Καταχώρηση" /></td>
 </table>
-</form
+</form>
 
 </center>
+</p>
 </body>
 </html>
